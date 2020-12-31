@@ -1,10 +1,15 @@
 require './classes/paciente.rb'
 
-def imprimeInformacao(acao,paciente)
+def imprimeInformacaoPaciente(acao,paciente)
     puts " Foi #{acao} paciente com nome #{paciente.nome} #{paciente.sobrenome} com telefone #{paciente.telefone}"
 end
 def criarPaciente(dados)
     nome, sobrenome, telefone = dados.split(',')
+    paciente = Paciente.find_by_nome(nome)
+    if(paciente)
+        puts "Paciente já cadastrado"
+        return
+    end
     if(!telefone)
         telefone = '(41)99999-9999'
     end
@@ -12,7 +17,27 @@ def criarPaciente(dados)
         :sobrenome => sobrenome,
         :telefone => telefone})
     paciente.save
-    imprimeInformacao('criado',paciente)
+    imprimeInformacaoPaciente('criado',paciente)
 end
-# editar Paciente
-# Remover Paciente
+def editarPaciente(dados)
+    nome, sobrenome, telefone = dados.split(',')
+    paciente = Paciente.find_by_nome(nome)
+    if(!paciente)
+        puts "O paciente com esse nome não existe"
+        return
+    end
+    paciente.sobrenome = sobrenome
+    paciente.telefone = telefone
+    paciente.save
+    imprimeInformacaoPaciente('editado',paciente)
+end
+def removerPaciente(dados)
+    nome = dados.split(',')
+    paciente = Paciente.find_by_nome(nome)
+    if(!paciente)
+        puts "O paciente com esse nome não existe"
+        return
+    end
+    paciente.destroy
+    imprimeInformacaoPaciente('removido',paciente)
+end
