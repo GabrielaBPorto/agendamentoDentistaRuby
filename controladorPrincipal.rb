@@ -1,11 +1,18 @@
 #!/usr/bin/env ruby
 require './controllers/controladorPaciente.rb'
 
-linha = gets.chomp
-comando, tabela, dados = linha.split(' ')
-if(comando.index('inserir'))
-    if(tabela.index('paciente'))
-        nome, sobrenome, telefone = dados.split(',')
-        criaPaciente(nome, sobrenome, telefone)
+
+input = gets.chomp
+while(!input.index('end'))
+    if(input == '')
+        input = gets.chomp
+        next
     end
+    comando, tabela, dados = input.split(' ')
+    if(comando.index('inserir'))
+        if(tabela.index('paciente'))
+            criarPaciente(dados)
+        end
+    end
+    input = gets.chomp
 end
