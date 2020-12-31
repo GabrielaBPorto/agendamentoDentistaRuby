@@ -14,5 +14,15 @@ while(!input.index('end'))
             criarPaciente(dados)
         end
     end
+    if(comando.index('editar'))
+        if(tabela.index('paciente'))
+            editarPaciente(dados)
+        end
+    end
+    if(comando.index('remover'))
+        if(tabela.index('paciente'))
+            removerPaciente(dados)
+        end
+    end
     input = gets.chomp
 end
