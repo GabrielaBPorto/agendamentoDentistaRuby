@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require './controllers/controladorPaciente.rb'
 require './controllers/controladorRecurso.rb'
+require './controllers/controladorProcedimento.rb'
 
 input = gets.chomp
 while(!input.index('end'))
@@ -16,6 +17,9 @@ while(!input.index('end'))
         if(tabela.index('recurso'))
             criarRecurso(dados)
         end
+        if(tabela.index('procedimento'))
+            criarProcedimento(dados)
+        end
     end
     if(comando.index('editar'))
         if(tabela.index('paciente'))
@@ -24,6 +28,9 @@ while(!input.index('end'))
         if(tabela.index('recurso'))
             editarRecurso(dados)
         end
+        if(tabela.index('procedimento'))
+            editarProcedimento(dados)
+        end
     end
     if(comando.index('remover'))
         if(tabela.index('paciente'))
@@ -31,6 +38,9 @@ while(!input.index('end'))
         end
         if(tabela.index('recurso'))
             removerRecurso(dados)
+        end
+        if(tabela.index('procedimento'))
+            removerProcedimento(dados)
         end
     end
     input = gets.chomp
