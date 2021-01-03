@@ -2,9 +2,13 @@
 require './controllers/controladorPaciente.rb'
 require './controllers/controladorRecurso.rb'
 require './controllers/controladorProcedimento.rb'
+require './controllers/controladorAgendamento.rb'
+
+
+require 'date'
 
 input = gets.chomp
-while(!input.index('end'))
+while(!input.index('termino'))
     if(input == '')
         input = gets.chomp
         next
@@ -19,6 +23,9 @@ while(!input.index('end'))
         end
         if(tabela.index('procedimento'))
             criarProcedimento(dados)
+        end
+        if(tabela.index('agendamento'))
+            criarAgendamento(dados)
         end
     end
     if(comando.index('editar'))
