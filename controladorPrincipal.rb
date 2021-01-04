@@ -38,6 +38,9 @@ while(!input.index('termino'))
         if(tabela.index('procedimento'))
             editarProcedimento(dados)
         end
+        if(tabela.index('agendamento'))
+            editarAgendamento(dados)
+        end
     end
     if(comando.index('remover'))
         if(tabela.index('paciente'))
@@ -48,6 +51,9 @@ while(!input.index('termino'))
         end
         if(tabela.index('procedimento'))
             removerProcedimento(dados)
+        end
+        if(tabela.index('agendamento'))
+            removerAgendamento(dados)
         end
     end
     input = gets.chomp
