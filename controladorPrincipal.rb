@@ -3,6 +3,7 @@ require './controllers/controladorPaciente.rb'
 require './controllers/controladorRecurso.rb'
 require './controllers/controladorProcedimento.rb'
 require './controllers/controladorAgendamento.rb'
+require './controllers/controladorDentista.rb'
 
 
 require 'date'
@@ -27,6 +28,9 @@ while(!input.index('termino'))
         if(tabela.index('agendamento'))
             criarAgendamento(dados)
         end
+        if(tabela.index('dentista'))
+            criarDentista(dados)
+        end
     end
     if(comando.index('editar'))
         if(tabela.index('paciente'))
@@ -41,6 +45,9 @@ while(!input.index('termino'))
         if(tabela.index('agendamento'))
             editarAgendamento(dados)
         end
+        if(tabela.index('dentista'))
+            editarDentista(dados)
+        end
     end
     if(comando.index('remover'))
         if(tabela.index('paciente'))
@@ -54,6 +61,9 @@ while(!input.index('termino'))
         end
         if(tabela.index('agendamento'))
             removerAgendamento(dados)
+        end
+        if(tabela.index('dentista'))
+            removerDentista(dados)
         end
     end
     input = gets.chomp
