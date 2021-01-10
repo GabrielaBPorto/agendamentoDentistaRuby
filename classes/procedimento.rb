@@ -5,6 +5,6 @@ ActiveRecord::Base.establish_connection :adapter => "sqlite3",
 
 class Procedimento < ActiveRecord::Base;
     has_many :recursos
-    has_and_belongs_to_many :dentistas, -> uniq
-    belongs_to :agendamento
+    #has_and_belongs_to_many :dentistas
+    #belongs_to :agendamento
 end

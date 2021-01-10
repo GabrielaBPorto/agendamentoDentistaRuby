@@ -1,22 +1,34 @@
 require './classes/recurso.rb'
+require './classes/procedimento.rb'
 
-def imprimeInformacaoRecurso(acao,recurso)
-    puts " Foi #{acao} recurso com nome #{recurso.nome} com custo #{recurso.custo}"
+def imprimeInformacaoRecurso(acao,recurso,procedimento='')
+    print " Foi #{acao} recurso com nome #{recurso.nome} com custo #{recurso.custo}"
+    if(procedimento != '')
+        puts " e pertence ao procedimento #{procedimento.nome}"
+    else
+        puts ''
+    end
 end
 def criarRecurso(dados)
-    nome, custo = dados.split(',')
+    nome, custo, nomeProcedimento = dados.split(',')
     recurso = Recurso.find_by_nome(nome)
     if(recurso)
         puts "recurso já cadastrado"
         return
     end
+    procedimento = Procedimento.find_by_nome(nomeProcedimento)
+    if(!procedimento)
+        puts "procedimento escolhido não existe, escolha outro"
+        return
+    end
     recurso = Recurso.new({:nome => nome,
         :custo => custo})
+    recurso.procedimentos_id = procedimento.id
     recurso.save
-    imprimeInformacaoRecurso('criado',recurso)
+    imprimeInformacaoRecurso('criado',recurso, procedimento)
 end
 def editarRecurso(dados)
-    nome, custo = dados.split(',')
+    nome, custo, nomeProcedimento = dados.split(',')
     if(!custo)
         puts "Sem custo, por favor defina um custo"
     end
@@ -25,9 +37,14 @@ def editarRecurso(dados)
         puts "O recurso com esse nome não existe"
         return
     end
+    procedimento = Procedimento.find_by_nome(nomeProcedimento)
+    if(!procedimento)
+        puts "procedimento escolhido não existe, escolha outro"
+        return
+    end
     recurso.custo = custo
     recurso.save
-    imprimeInformacaoRecurso('editado',recurso)
+    imprimeInformacaoRecurso('editado',recurso,procedimento)
 end
 def removerRecurso(dados)
     nome = dados.split(',')
